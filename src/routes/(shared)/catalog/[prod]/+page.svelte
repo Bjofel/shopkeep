@@ -1,0 +1,163 @@
+<script lang="ts">
+  import { enhance } from "$app/forms";
+  import { each } from "svelte/internal";
+  import type { ActionData, PageServerData } from "./$types";
+
+  export let form: ActionData;
+  export let data: PageServerData;
+
+  import { browser } from "$app/environment";
+  import { page } from "$app/stores";
+  import { onDestroy } from "svelte";
+
+  import ReconnectingEventSource from "reconnecting-eventsource";
+
+  if (browser) {
+    let es: ReconnectingEventSource;
+    es = new ReconnectingEventSource(`/catalog/${$page.params.prod}`);
+    es.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      /* add the new message */
+      if (message) {
+        message.createdAt = new Date(message.createdAt.toString());
+        data.Comments = [message, ...data.Comments];
+      }
+    };
+    onDestroy(() => {
+      es.close();
+    });
+  }
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap"
+  rel="stylesheet"
+/>
+<div class="block" />
+<div class="main-container">
+  <div class="sub-container">
+    <div>
+      <img
+        src="https://placeholder.pics/svg/200/18181c/FF6E31/PlaceHolder"
+        alt=""
+      />
+    </div>
+
+    <div>
+      <p class="price">Price:</p>
+      <p>{data.price}</p>
+    </div>
+    <p>{data.prodName}</p>
+    <p>{data.desc}</p>
+  </div>
+
+  <!-- Comment section -->
+  <div class="thread">
+    <p>Comments</p>
+    {#each data.Comments as item}
+      <div class="thread-each">
+        <p>{item.sentBy}</p>
+        <p>{item.message}</p>
+        <p>{item.createdAt}</p>
+      </div>
+    {/each}
+    {#if data?.userid}
+      <div class="add-comment">
+        <form
+          use:enhance={({ form }) => {
+            form.reset();
+          }}
+          method="post"
+          action="?/write"
+        >
+          <input
+            required
+            type="text"
+            name="messageDisc"
+            placeholder="message"
+            id=""
+          />
+          <button type="submit">write message</button>
+          {#if form?.error}
+            {form.error}
+          {/if}
+        </form>
+      </div>
+    {/if}
+  </div>
+</div>
+
+<style>
+  .main-container {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .sub-container {
+    font-family: lato;
+    color: white;
+    display: flex;
+    margin: 50px auto auto auto;
+    width: clamp(300px, 80%, 800px);
+    height: 300px;
+    border-radius: 10px;
+    background-color: #242429;
+    border: 1px solid #303036;
+  }
+  .price {
+    color: #537fe7;
+  }
+
+  .block {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    height: 53px;
+  }
+
+  .thread {
+    padding-top: 10px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: auto;
+    background-color: #242429;
+    border-radius: 20px;
+    border: 1px solid #303036;
+    color: white;
+    font-family: lato;
+    width: clamp(300px, 80%, 800px);
+    margin: 50px auto 50px auto;
+    gap: 20px;
+  }
+  .thread-each {
+    display: flex;
+    align-items: center;
+    background-color: #18181c;
+    border-radius: 12px;
+    border: 1px solid #ffffff1a;
+    width: 90%;
+    height: 50px;
+    gap: 25px;
+  }
+
+  .add-comment {
+    padding-top: 10px;
+    grid-template-columns: auto;
+    background-color: #242429;
+    color: white;
+    font-family: lato;
+    width: 90%;
+    margin: 50px auto 50px auto;
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #242429;
+    border-radius: 12px;
+    border: 1px solid #ffffff1a;
+    height: 50px;
+    padding: 0, 12px;
+  }
+</style>
