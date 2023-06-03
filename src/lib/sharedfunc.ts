@@ -146,13 +146,13 @@
 //     userDB.insertOne({ "uniqueId": crypto.randomUUID(), "username": Givenusername, "password": hash, "salt": salt, "customUrl": customUrl })
 // }
 // // base fucntion to create a session token
-// export const rand = () => {
-//     return Math.random().toString(36).substr(2);
-// };
+export const rand = () => {
+    return Math.random().toString(36).substr(2);
+};
 // // creates a session token with the base function
-// export const randomtoken = () => {
-//     return rand() + rand();
-// };
+export const randomtoken = () => {
+    return rand() + rand();
+};
 
 
 // // gets information from the change_usename collection
