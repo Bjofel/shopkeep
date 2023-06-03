@@ -4,7 +4,7 @@ import type { RequestHandler } from './$types';
 const productDB: DBexporter = new DBexporter()
 
 
-export const GET: RequestHandler = ({ request }) {
+export const GET: RequestHandler = ({ request }) => {
     const ac = new AbortController();
 
     const stream = new ReadableStream({
