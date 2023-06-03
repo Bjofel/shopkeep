@@ -43,42 +43,4 @@ export const actions: Actions = {
 		// redirects the user back to register
 		throw redirect(302, '/register')
 	},
-
-
-	// 	// request a password change
-	// 	requestPasswordChange: async ({ request, locals, cookies }) => {
-
-	// 		// checks if cookie is valid
-	// 		kickout(locals)
-
-	// 		// randomizes the id for the URL
-	// 		const changeUrl = crypto.randomUUID()
-
-	// 		// find the session token's properties
-	// 		const finder = await sessionFinder(locals.userid)
-
-	// 		// creates a request in the database to change password
-	// 		passwordChangeRequest(changeUrl, finder?.uniqueId)
-
-	// 		// redirect the client to intended password change link
-	// 		throw redirect(302, changeUrl)
-	// 	},
-
-	// 	// request to change username
-	// 	requestUsernameChange: async ({ request, locals, cookies }) => {
-
-	// 		// checks if cookie is valid
-	// 		kickout(locals)
-	// 		// randomizes the id for the URL
-	// 		let changeUrl = crypto.randomUUID()
-	// 		let directUrl = '/settings/' + changeUrl
-	// 		// find the session token's properties
-	// 		let finder = await sessionFinder(locals.userid)
-
-	// 		// creates a request in the database to change password
-	// 		nameChangeReq(changeUrl, finder?.uniqueId)
-
-	// 		// redirect the client to intended password change link
-	// 		throw redirect(302, directUrl)
-	// 	}
 }

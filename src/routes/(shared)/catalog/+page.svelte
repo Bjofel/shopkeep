@@ -1,8 +1,7 @@
 <script lang="ts">
-  import { browser } from "$app/environment";
   import { enhance } from "$app/forms";
   import type { ActionData, PageServerData } from "./$types";
-  import { fade, fly } from "svelte/transition";
+  import { fade } from "svelte/transition";
   export let form: ActionData;
   export let data: PageServerData;
 
@@ -19,7 +18,7 @@
   style="width:100%;background-color: rgba(0, 0, 0, 0);height: 53px;"
 />
 {#if data?.userid}
-  <button id="buttonAdd" on:click={() => (addPord = true)}>Add prod</button>
+  <button id="buttonAdd" on:click={() => console.log("reee")}>Add prod</button>
 {/if}
 <div class="main-container">
   <div class="container">

@@ -102,6 +102,7 @@ export class User implements AuthUser {
     }
     // removes Session token
     removeToken(): void {
+        console.log(this.token)
         sessionTokenDB.deleteOne({ "sessionToken": this.token })
     }
 
