@@ -1,4 +1,4 @@
-import { invalid, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import { User } from '$lib/implements';
 
@@ -26,7 +26,7 @@ export const actions: Actions = {
 
 		// checks to see IF session token is valid	
 		if (await authUser.valid() == false) {
-			return invalid(400, { message: "Invalid token" })
+			return fail(400, { message: "Invalid token" })
 		}
 
 		// finds sesion token from locas

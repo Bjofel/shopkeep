@@ -2,6 +2,7 @@
   import type { LayoutServerData } from "./$types";
   export let data: LayoutServerData;
 
+  // Dropdown menu function for phone. Cheap way to do it but meh
   function myFunction() {
     var x = document.getElementById("myLinks");
     if (x.style.display === "block") {
@@ -17,9 +18,11 @@
 
 <main style="height: 100vh; width:100%">
   <header class="head">
+    <!-- Cool blue line effect -->
     <div class="topbar" />
-
+    <!-- Nav wrapper -->
     <nav class="topnav">
+      <!-- Desktop nav menu -->
       <div class="desktop">
         <a class="active" href="/catalog">Catalog</a>
 
@@ -33,6 +36,7 @@
         <a id="navChange" href="/info">Info</a>
         <a id="navChange" href="/support">Support</a>
       </div>
+      <!-- Mobile nav menu -->
       <div class="mobile">
         <!-- Top Navigation Menu -->
         <div class="mob">

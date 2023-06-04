@@ -13,30 +13,48 @@
   href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap"
   rel="stylesheet"
 />
+<!-- Makes sure nothing goes hidden behind the menus Postion fixed -->
 <div
   class="block"
   style="width:100%;background-color: rgba(0, 0, 0, 0);height: 53px;"
 />
+<!-- If user signed in will display option to put up item for sale -->
 {#if data?.userid}
-  <button id="buttonAdd" on:click={() => console.log("reee")}>Add prod</button>
+  <a id="buttonAdd" href="/commercial">add Product</a>
+  <!-- for some reason on:click decided to off itself... great -->
+  <!-- <button id="buttonAdd" on:click={() => addPord == true}>Add prod</button> -->
 {/if}
+<!-- Main wrapper -->
 <div class="main-container">
+  <!-- Wrapper for the item container -->
   <div class="container">
+    <!-- Wrapper for the items -->
     <div class="grid-container">
+      <!-- If retrival fromb DB == true -->
       {#if data.product}
+        <!-- Loops through item and creates an idividual Element for each -->
         {#each data.product as item}
+          <!-- Picture placeholder serves no real benefit but hey less load while looking cool -->
           <div class="grid-item">
             <img
               class="grid-image"
               src="https://placeholder.pics/svg/200/fff/FF6E31/PlaceHolder"
               alt="https://placeholder.pics/svg/200/243763/FF6E31/PlaceHolder"
             />
+            <!-- reference point to view the item on its own dedicated store place -->
             <p>
-              <a style="color: #c7d5e0;" href={"/catalog/" + item.URL}
+              <a class="item_name_ref" href={"/catalog/" + item.URL}
                 >{item.prodName}</a
               >
             </p>
             <p>Price: {item.price} Kr</p>
+
+            <!-- If user is logged in display option to add to cart -->
+            {#if data?.userid}
+              <!-- Button to add item to cart -->
+
+              <button class="AddCart">Add To Cart</button>
+            {/if}
           </div>
         {/each}
       {/if}
@@ -46,7 +64,7 @@
       <div class="overlay-overview" transition:fade={{ duration: 200 }}>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- DO NOT REMOVE COMMENT ABOVE -->
-        <div class="overlay" on:click={() => (addPord = false)} />
+        <div class="overlay" on:keydown={() => (addPord = false)} />
 
         <div class="overlay-content">
           <form use:enhance method="POST" action="?/addProduct">
@@ -131,6 +149,8 @@
     width: 100px;
     height: 50px;
     font-family: "Lato";
+    text-decoration: none;
+    justify-content: center;
     color: white;
     position: absolute;
     z-index: 2;
@@ -173,6 +193,7 @@
     gap: 50px;
     margin: 0 auto;
     position: relative;
+    width: clamp(300px, 80%, 800px);
   }
   .grid-item {
     background-color: #242429;
@@ -184,6 +205,7 @@
     font-size: 20px;
     text-align: center;
     border: 1px solid #303036;
+    width: clamp(300px, 80%, 800px);
 
     /* filter: drop-shadow(0 0 0.75rem #19376d); */
   }
@@ -207,5 +229,33 @@
     background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
+  }
+
+  .item_name_ref {
+    text-decoration: none;
+    color: #c7d5e0;
+  }
+  .item_name_ref:hover {
+    text-decoration: underline;
+    color: #0040d3;
+  }
+
+  .AddCart {
+    background-color: #537fe7;
+    border-style: solid;
+    color: white;
+    margin-top: 10px;
+    padding: 5px;
+    width: 25%;
+    height: 10%;
+    border-radius: 12px;
+    border-color: rgba(0, 0, 0, 0);
+    box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+  }
+  .AddCart:hover {
+    background-color: white;
+    color: #040404;
+    cursor: pointer;
   }
 </style>

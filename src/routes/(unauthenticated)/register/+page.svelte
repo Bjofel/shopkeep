@@ -54,7 +54,7 @@
 
   .sub-container {
     background-color: #242429;
-    width: 500px;
+    width: clamp(300px, 32.5%, 900px);
     height: 500px;
     border-radius: 12px;
     box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.5);

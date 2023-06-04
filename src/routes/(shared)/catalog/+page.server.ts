@@ -13,6 +13,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 
 };
 
+
 // additional functionality avalible for the client to use
 export const actions: Actions = {
   addProduct: async ({ request, locals, cookies }) => {
@@ -97,7 +98,6 @@ export const actions: Actions = {
 
   },
 };
-
 
 
 
