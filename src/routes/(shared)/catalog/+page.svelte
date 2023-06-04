@@ -202,6 +202,7 @@
     border-radius: 10px;
     font-family: lato;
     color: white;
+    margin: auto;
     font-size: 20px;
     text-align: center;
     border: 1px solid #303036;
