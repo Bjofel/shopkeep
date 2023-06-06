@@ -4,7 +4,7 @@ import * as crypto from "crypto";
 import { Management, unauthedUser } from '$lib/implements';
 import type { detailVetted } from '$lib/interface';
 import { detach } from 'svelte/internal';
-import { randomtoken } from '$lib/sharedfunc';
+import { randomtoken, rand } from '$lib/sharedfunc';
 
 let found = false
 let passwordSecured = true
@@ -92,7 +92,7 @@ export const actions: Actions = {
 					// Creates a new entry in the user collection
 					management.createUser(username, hash, salt, randomDefaultUrl)
 
-					// 
+					// looks for if user already exists
 					const findUser: detailVetted = await management.findUser(username)
 
 					// creates a session token
