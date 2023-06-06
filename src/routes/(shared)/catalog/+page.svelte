@@ -6,6 +6,12 @@
   export let data: PageServerData;
 
   let addPord: boolean = false;
+
+  let count = 0;
+
+  function incrementCount() {
+    count += 1;
+  }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,10 +26,15 @@
 />
 <!-- If user signed in will display option to put up item for sale -->
 {#if data?.userid}
-  <a id="buttonAdd" href="/commercial">add Product</a>
+  <!-- <a id="buttonAdd" href="/commercial">add Product</a> -->
   <!-- for some reason on:click decided to off itself... great -->
-  <!-- <button id="buttonAdd" on:click={() => addPord == true}>Add prod</button> -->
+  <button id="buttonAdd" on:click={() => addPord == true}>Add prod</button>
 {/if}
+
+<!-- <button on:click|capture={incrementCount}>
+  Clicked {count}
+  {count === 1 ? "time" : "times"}
+</button> -->
 <!-- Main wrapper -->
 <div class="main-container">
   <!-- Wrapper for the item container -->
