@@ -1,4 +1,4 @@
-import { invalid as fail, redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import * as crypto from "crypto";
 import { randomtoken } from '$lib/sharedfunc';

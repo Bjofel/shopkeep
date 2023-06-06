@@ -165,7 +165,6 @@
     color: white;
     position: absolute;
     z-index: 2;
-    filter: drop-shadow(0 0 0.1rem white);
   }
 
   #buttonAdd:hover {
