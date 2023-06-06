@@ -18,14 +18,14 @@
       <form method="POST" action="?/logout">
         <p>Log out of your current account</p>
 
-        <button>LOGOUT</button>
+        <button class="button">LOGOUT</button>
       </form>
 
       <!-- account termination -->
       <form method="POST" action="?/deleteaccount">
         <p>Delete your current account</p>
 
-        <button>DELETE ACCOUNT</button>
+        <button class="button">DELETE ACCOUNT</button>
       </form>
     </div>
   </div>
@@ -67,5 +67,24 @@
   p {
     font-family: lato;
     color: white;
+  }
+
+  .button {
+    background-color: #537fe7;
+    border-style: solid;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 50px;
+    font-family: "Lato";
+    text-decoration: none;
+    justify-content: center;
+    color: white;
+  }
+
+  .button:hover {
+    background-color: white;
+    color: #040404;
+    cursor: pointer;
   }
 </style>
