@@ -10,7 +10,6 @@ let Management: manage = new manage()
 export const actions: Actions = {
 	login: async ({ request, locals, cookies, event }) => {
 
-
 		const form = await request.formData();
 
 		// Sets the seesoin token into a variable
