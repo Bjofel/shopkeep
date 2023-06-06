@@ -37,87 +37,85 @@ function lenghtChecker(username: string, password: string) {
 export const actions: Actions = {
 	register: async ({ request, locals, cookies }) => {
 
-		try {
-
-			const form = await request.formData();
 
 
-
-			let username: string | undefined;
-			let password: string | undefined;
+		const form = await request.formData();
 
 
-			// if data were transmitted succesfully
-			if (form) {
-				// variable for the class
-				let user: unauthedUser
 
-				// sets variable to for usename and password
-				username = form?.get("username")?.toString()
-				password = form?.get("password")?.toString()
+		let username: string | undefined;
+		let password: string | undefined;
 
-				// checks the type to make sure their both have string
 
-				// checks if their types are strings and initated the class
-				if (typeof username === "string" && typeof password === "string") {
-					user = new unauthedUser(username, password)
+		// if data were transmitted succesfully
+		if (form) {
+			// variable for the class
+			let user: unauthedUser
 
-				} else {
-					// returns invalid IF password or username either is missing or wrong type
-					return fail(400, { message: "Stuff Missing" })
-				}
+			// sets variable to for usename and password
+			username = form?.get("username")?.toString()
+			password = form?.get("password")?.toString()
 
-				// checks if username does already exists | Prevents create if found
-				if (await (await user.existCheck()).result !== null) {
-					return fail(400, { message: "user already exists" })
+			// checks the type to make sure their both have string
 
-				}
+			// checks if their types are strings and initated the class
+			if (typeof username === "string" && typeof password === "string") {
+				user = new unauthedUser(username, password)
 
-				lenghtChecker(username, password)
-
-				// Creating a unique salt for a particular user
-				let salt: string = crypto.randomBytes(16).toString('hex');
-
-				// admin settings
-				let management: Management = new Management()
-				// Checks if user has a too short username, Check if password is more than or equal to 5 character, Checsk if username has been finder in collection
-				if (shortName == false && passwordSecured == true && found == false) {
-
-					// Hash the salt and password with 1000 iterations, 64 length and sha512 digest 
-					const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
-
-					// creates a randomURL
-					const randomDefaultUrl = rand() + rand()
-
-					// Creates a new entry in the user collection
-					management.createUser(username, hash, salt, randomDefaultUrl)
-
-					// looks for if user already exists
-					const findUser: detailVetted = await management.findUser(username)
-
-					// creates a session token
-					const sessionToken = randomtoken()
-
-					// creates a cookie in DB
-					await management.createToken(findUser.uniqueID, sessionToken, username)
-
-					// Sets a session token in the Cookies
-					cookies.set('userid', sessionToken, {
-						path: '/',
-						httpOnly: true, // optional for now
-						sameSite: 'strict',// optional for now
-						secure: process.env.NODE_ENV === 'production',// optional for now
-						maxAge: 604800 // seconds || Sets it to a year which is max allowed by law
-					})
-
-					// Redirects to home after register
-					throw redirect(302, '/catalog')
-				}
+			} else {
+				// returns invalid IF password or username either is missing or wrong type
+				return fail(400, { message: "Stuff Missing" })
 			}
 
-		} catch (e) {
-			console.log(e)
+			// checks if username does already exists | Prevents create if found
+			if (await (await user.existCheck()).result !== null) {
+				return fail(400, { message: "user already exists" })
+
+			}
+
+			lenghtChecker(username, password)
+
+			// Creating a unique salt for a particular user
+			let salt: string = crypto.randomBytes(16).toString('hex');
+
+			// admin settings
+			let management: Management = new Management()
+			// Checks if user has a too short username, Check if password is more than or equal to 5 character, Checsk if username has been finder in collection
+			if (shortName == false && passwordSecured == true && found == false) {
+
+				// Hash the salt and password with 1000 iterations, 64 length and sha512 digest 
+				const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, 'sha512').toString('hex');
+
+				// creates a randomURL
+				const randomDefaultUrl = rand() + rand()
+
+				// Creates a new entry in the user collection
+				management.createUser(username, hash, salt, randomDefaultUrl)
+
+				// looks for if user already exists
+				const findUser: detailVetted = await management.findUser(username)
+
+				// creates a session token
+				const sessionToken = randomtoken()
+
+				// creates a cookie in DB
+				await management.createToken(findUser.uniqueID, sessionToken, username)
+
+				// Sets a session token in the Cookies
+				cookies.set('userid', sessionToken, {
+					path: '/',
+					httpOnly: true, // optional for now
+					sameSite: 'strict',// optional for now
+					secure: process.env.NODE_ENV === 'production',// optional for now
+					maxAge: 604800 // seconds || Sets it to a year which is max allowed by law
+				})
+
+				// Redirects to home after register
+				throw redirect(302, '/catalog')
+			}
 		}
+
+
 
 
 
