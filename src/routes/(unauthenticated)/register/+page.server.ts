@@ -1,10 +1,10 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import * as crypto from "crypto";
-import { createToken, createUser, finderUsernameExluded, rand, randomtoken } from '$lib/sharedfunc';
 import { Management, unauthedUser } from '$lib/implements';
 import type { detailVetted } from '$lib/interface';
 import { detach } from 'svelte/internal';
+import { randomtoken } from '$lib/sharedfunc';
 
 let found = false
 let passwordSecured = true
