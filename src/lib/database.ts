@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const test = "mongodb+srv://test:" + process.env.PASSWORD + "@shopkeep.tz9a4su.mongodb.net/?retryWrites=true&w=majority"
+const test = "mongodb+srv://test:" + "123" + "@shopkeep.tz9a4su.mongodb.net/?retryWrites=true&w=majority"
 
 
 export async function connect(): Promise<MongoClient> {

@@ -1,3 +1,9 @@
+
+<head>
+    <script src="https://kit.fontawesome.com/045c97b669.js" crossorigin="anonymous"></script>
+
+</head>
+
 <script lang="ts">
   import type { LayoutServerData } from "./$types";
   export let data: LayoutServerData;
@@ -10,10 +16,13 @@
       x.style.display = "block";
     }
   }
+
+  
 </script>
 
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+
 
 <main style="height: 100vh; width:100%">
   <header class="head">
@@ -39,7 +48,7 @@
           <a class="active" href="/catalog">Catalog</a>
           <!-- svelte-ignore a11y-click-events-have-key-events -->
           <div class="icon" on:click={myFunction}>
-            <i class="fa fa-bars" />
+            <i id="icon" class="fa-solid fa-bars" style="color: #666675;"></i>
           </div>
         </div>
         <div id="myLinks" style="display: none;">
@@ -153,13 +162,19 @@
 
   .icon {
     background-color: #45454f;
-    display: block;
+    display: flex;
     position: absolute;
+    align-items:center;
     right: 0;
     width: 50px;
     height: 52px;
     top: 0;
     cursor: pointer;
+  }
+
+  #icon {
+    margin:auto;
+    font-size:20px;
   }
 
   .mob a:hover {

@@ -16,12 +16,12 @@
 <div class="main-container">
   <div class="sub-container">
     <div class="sup-container">
-      <p class="text">
-        If you still have questions reach out to us <a
+      <p class="text"> Support page have been moved
+         <a
           style="color:#0040d3;"
           href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley"
           >here</a
-        > our support team are ready to handle any question you might have for us.
+        > If you still have questions reach out to us. our support team are ready to handle any question you might have for us.
       </p>
     </div>
   </div>
