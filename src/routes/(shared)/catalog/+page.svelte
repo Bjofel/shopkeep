@@ -19,7 +19,7 @@
   href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap"
   rel="stylesheet"
 />
-<!-- Makes sure nothing goes hidden behind the menus Postion fixed -->
+<!-- Makes sure nothing goes hidden behind the Nav menu Postion fixed -->
 <div
   class="block"
   style="width:100%;background-color: rgba(0, 0, 0, 0);height: 53px;"
@@ -28,13 +28,10 @@
 {#if data?.userid}
   <!-- <a id="buttonAdd" href="/commercial">add Product</a> -->
   <!-- for some reason on:click decided to off itself... great -->
-  <button id="buttonAdd" on:click={() => addPord == true}>Add prod</button>
+  <button id="buttonAdd" on:click={() => addPord = true}>Add prod</button>
 {/if}
 
-<!-- <button on:click|capture={incrementCount}>
-  Clicked {count}
-  {count === 1 ? "time" : "times"}
-</button> -->
+
 <!-- Main wrapper -->
 <div class="main-container">
   <!-- Wrapper for the item container -->
@@ -75,7 +72,7 @@
       <div class="overlay-overview" transition:fade={{ duration: 200 }}>
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <!-- DO NOT REMOVE COMMENT ABOVE -->
-        <div class="overlay" on:keydown={() => (addPord = false)} />
+        <div class="overlay" on:click={() => addPord = false} />
 
         <div class="overlay-content">
           <form use:enhance method="POST" action="?/addProduct">
